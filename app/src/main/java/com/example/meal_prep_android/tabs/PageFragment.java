@@ -1,23 +1,30 @@
 package com.example.meal_prep_android.tabs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
+import com.example.meal_prep_android.DetailsActivity;
 import com.example.meal_prep_android.R;
 import com.example.meal_prep_android.models.ListItem;
+import com.google.gson.Gson;
 
 //import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,11 +65,11 @@ public class PageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d("onViewCreated", "onViewCreated");
 
-        TextView text = view.findViewById(R.id.page_text_view);
-        text.setText(getArguments().getString(TITLE));
+//        TextView text = view.findViewById(R.id.page_text_view);
+//        text.setText(getArguments().getString(TITLE));
         try {
             String url = "json/mealData.json";
-              parseJson(url);
+            parseJson(url);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,22 +94,28 @@ public class PageFragment extends Fragment {
 
             for(Object o: result){
                 if ( o instanceof JSONObject ) {
-                   items.add(
-                            new ListItem(
-                                    ((JSONObject) o).get("id").toString(),
-                                    ((JSONObject) o).get("name").toString(),
-                                    ((JSONObject) o).get("imageName").toString(),
-                                    ((JSONObject) o).get("description").toString(),
-                                    ((JSONObject) o).get("ingredients").toString(),
-                                    ((JSONObject) o).get("directions").toString(),
-                                    ((JSONObject) o).get("category").toString(),
-                                    ((JSONObject) o).get("availableOn").toString(),
-                                    ((JSONObject) o).get("datePublished").toString(),
-                                    ((JSONObject) o).get("url").toString()
-                            )
-                    );
+                    System.out.println(getArguments().getString(TITLE));
+                    System.out.println(((JSONObject) o).get("availableOn").toString());
+                    System.out.println(((JSONObject) o).get("availableOn").toString().equals(getArguments().getString(TITLE)));
+                    if(((JSONObject) o).get("availableOn").toString().equals(getArguments().getString(TITLE))) {
+                        items.add(
+                                new ListItem(
+                                        ((JSONObject) o).get("id").toString(),
+                                        ((JSONObject) o).get("name").toString(),
+                                        ((JSONObject) o).get("imageName").toString(),
+                                        ((JSONObject) o).get("description").toString(),
+                                        ((JSONObject) o).get("ingredients").toString(),
+                                        ((JSONObject) o).get("directions").toString(),
+                                        ((JSONObject) o).get("category").toString(),
+                                        ((JSONObject) o).get("availableOn").toString(),
+                                        ((JSONObject) o).get("datePublished").toString(),
+                                        ((JSONObject) o).get("url").toString()
+                                )
+                        );
+                    }
                 }
             }
+            prepareListView();
 
             for(ListItem item: items){
                 System.out.println(item.getName());
@@ -116,21 +129,21 @@ public class PageFragment extends Fragment {
         }
     }
 
-//    private void prepareListView() {
-//        RecyclerView rv = findViewById(R.id.list_recycler_view);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        DataModelAdapter dataModelAdapter = new DataModelAdapter(users);
-//
-//        rv.setLayoutManager(layoutManager);
-//        rv.setAdapter(dataModelAdapter);
-//    }
+    private void prepareListView() {
+        RecyclerView rv = getView().findViewById(R.id.list_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+        DataModelAdapter dataModelAdapter = new DataModelAdapter(items);
+
+        rv.setLayoutManager(layoutManager);
+        rv.setAdapter(dataModelAdapter);
+    }
 }
 
 class DataModelAdapter extends RecyclerView.Adapter<DataModelViewHolder> {
 
-    String[] cardItems;
+    ArrayList<ListItem> cardItems;
 
-    public DataModelAdapter(String[] items) {
+    public DataModelAdapter(ArrayList<ListItem> items) {
         this.cardItems = items;
     }
 
@@ -139,26 +152,52 @@ class DataModelAdapter extends RecyclerView.Adapter<DataModelViewHolder> {
     public DataModelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
+//        View view = layoutInflater.inflate(R.layout.vertical_item_card_view, parent, false);
         View view = layoutInflater.inflate(R.layout.list_item_card_view, parent, false);
+
 
         return new DataModelViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DataModelViewHolder holder, int position) {
+        ListItem item = cardItems.get(position);
+
+//        holder.firstName.setText(user.getFirstname());
+//        holder.lastName.setText(user.getLastname());
+        holder.name.setText(item.getName());
+
+        Glide.with(holder.parent.getContext())
+                .load(item.getImageName())
+                .into(holder.imageView);
+
+        holder.id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DetailsActivity.class);
+                intent.putExtra("onClickedItem", new Gson().toJson(item));
+                v.getContext().startActivity(intent);
+            }
+        });
     }
     @Override
     public int getItemCount() {
-        return 3;
+        return cardItems.size();
     }
 }
 
 class DataModelViewHolder extends RecyclerView.ViewHolder {
     View parent;
+    ImageView imageView;
+    LinearLayout id;
+    TextView name;
 
     public DataModelViewHolder(@NonNull View itemView) {
         super(itemView);
         parent = itemView;
+        id = itemView.findViewById(R.id.linear_layout);
+        imageView = itemView.findViewById(R.id.image_view);
+        name = itemView.findViewById(R.id.name_text_view);
 
     }
 

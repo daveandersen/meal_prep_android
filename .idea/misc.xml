@@ -14,6 +14,7 @@
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/drawable/item_selected.xml" value="0.121" />
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/drawable/primary_button.xml" value="0.121" />
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/drawable/secondary_button.xml" value="0.12" />
+        <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/layout/activity_details.xml" value="0.10677083333333333" />
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/layout/activity_home_page.xml" value="0.264" />
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/layout/activity_home_page2.xml" value="0.1" />
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/layout/activity_landing_page.xml" value="0.37082601054481545" />
@@ -28,6 +29,7 @@
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/layout/fragment_page.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/layout/items_list.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/layout/list_item_card_view.xml" value="0.4" />
+        <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/layout/vertical_item_card_view.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/Dave/AndroidStudioProjects/meal_prep_android/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
       </map>
     </option>

@@ -5,13 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".tabs.PageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/page_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Page 1"
-        android:textSize="48sp"
-        />
+     TODO: Update blank fragment layout
+<!--    <TextView-->
+<!--        android:id="@+id/page_text_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:text="Page 1"-->
+<!--        android:textSize="48sp"-->
+<!--        />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_recycler_view" />
+
 </RelativeLayout>
