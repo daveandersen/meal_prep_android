@@ -1,24 +1,26 @@
 package com.example.meal_prep_android;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class LandingPageActivity extends AppCompatActivity {
     private Button getStartedButton;
     private TextView login_btn;
+    private ImageView landingpage_pic;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,15 @@ public class LandingPageActivity extends AppCompatActivity {
 
         getStartedButton = findViewById(R.id.getStarted_btn);
         login_btn = findViewById(R.id.login_btn);
+        landingpage_pic = findViewById(R.id.landingpage_pic);
+
+        try {
+            InputStream ims = this.getAssets().open("images/landingpage.jpg");
+            Drawable d = Drawable.createFromStream(ims, null);
+            landingpage_pic.setImageDrawable(d);
+        } catch (Exception ex) {
+            Log.d("mylog", "Error: " + ex.toString());
+        }
 
         getStartedButton.setOnTouchListener(new View.OnTouchListener() {
             @Override

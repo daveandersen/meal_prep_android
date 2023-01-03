@@ -3,13 +3,18 @@ package com.example.meal_prep_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.InputStream;
 
 public class LoginActivity extends AppCompatActivity {
     private Button login_btn;
@@ -17,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView forgot_password_btn;
     private EditText email;
     private EditText password;
+    private ImageView login_pic;
 
 
     @Override
@@ -29,7 +35,15 @@ public class LoginActivity extends AppCompatActivity {
         forgot_password_btn = findViewById(R.id.change_password);
         email = findViewById(R.id.email_field);
         password = findViewById(R.id.password_field);
+        login_pic = findViewById(R.id.login_pic);
 
+        try {
+            InputStream ims = this.getAssets().open("images/login.jpg");
+            Drawable d = Drawable.createFromStream(ims, null);
+            login_pic.setImageDrawable(d);
+        } catch (Exception ex) {
+            Log.d("mylog", "Error: " + ex.toString());
+        }
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             public void makeToast(String text) {
