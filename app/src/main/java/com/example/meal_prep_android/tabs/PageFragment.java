@@ -49,7 +49,9 @@ public class PageFragment extends Fragment {
 
     public static final String TITLE = "title";
     public ArrayList<ListItem> items;
-
+    public ArrayList<ListItem> breakfastItems;
+    public ArrayList<ListItem> lunchItems;
+    public ArrayList<ListItem> dinnerItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,27 +93,51 @@ public class PageFragment extends Fragment {
             System.out.println(result);
             Log.d("jsonResult", result.toString());
             items = new ArrayList<ListItem>();
+            breakfastItems = new ArrayList<ListItem>();
+            lunchItems = new ArrayList<ListItem>();
+            dinnerItems = new ArrayList<ListItem>();
+
 
             for(Object o: result){
                 if ( o instanceof JSONObject ) {
                     System.out.println(getArguments().getString(TITLE));
                     System.out.println(((JSONObject) o).get("availableOn").toString());
                     System.out.println(((JSONObject) o).get("availableOn").toString().equals(getArguments().getString(TITLE)));
+                    ListItem tempItem = new ListItem(
+                            ((JSONObject) o).get("id").toString(),
+                            ((JSONObject) o).get("name").toString(),
+                            ((JSONObject) o).get("imageName").toString(),
+                            ((JSONObject) o).get("description").toString(),
+                            ((JSONObject) o).get("ingredients").toString(),
+                            ((JSONObject) o).get("directions").toString(),
+                            ((JSONObject) o).get("category").toString(),
+                            ((JSONObject) o).get("availableOn").toString(),
+                            ((JSONObject) o).get("datePublished").toString(),
+                            ((JSONObject) o).get("url").toString()
+                    );
+
                     if(((JSONObject) o).get("availableOn").toString().equals(getArguments().getString(TITLE))) {
-                        items.add(
-                                new ListItem(
-                                        ((JSONObject) o).get("id").toString(),
-                                        ((JSONObject) o).get("name").toString(),
-                                        ((JSONObject) o).get("imageName").toString(),
-                                        ((JSONObject) o).get("description").toString(),
-                                        ((JSONObject) o).get("ingredients").toString(),
-                                        ((JSONObject) o).get("directions").toString(),
-                                        ((JSONObject) o).get("category").toString(),
-                                        ((JSONObject) o).get("availableOn").toString(),
-                                        ((JSONObject) o).get("datePublished").toString(),
-                                        ((JSONObject) o).get("url").toString()
-                                )
-                        );
+                        if(((JSONObject) o).get("category").toString().equals("Breakfast")){
+                            breakfastItems.add(tempItem);
+                        } else if(((JSONObject) o).get("category").toString().equals("Lunch")) {
+                            lunchItems.add(tempItem);
+                        } else {
+                            dinnerItems.add(tempItem);
+                        }
+//                        items.add(
+//                                new ListItem(
+//                                        ((JSONObject) o).get("id").toString(),
+//                                        ((JSONObject) o).get("name").toString(),
+//                                        ((JSONObject) o).get("imageName").toString(),
+//                                        ((JSONObject) o).get("description").toString(),
+//                                        ((JSONObject) o).get("ingredients").toString(),
+//                                        ((JSONObject) o).get("directions").toString(),
+//                                        ((JSONObject) o).get("category").toString(),
+//                                        ((JSONObject) o).get("availableOn").toString(),
+//                                        ((JSONObject) o).get("datePublished").toString(),
+//                                        ((JSONObject) o).get("url").toString()
+//                                )
+//                        );
                     }
                 }
             }
@@ -131,8 +157,8 @@ public class PageFragment extends Fragment {
 
     private void prepareListView() {
         RecyclerView rv = getView().findViewById(R.id.list_recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
-        DataModelAdapter dataModelAdapter = new DataModelAdapter(items);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        DataModelAdapter dataModelAdapter = new DataModelAdapter(breakfastItems);
 
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(dataModelAdapter);
