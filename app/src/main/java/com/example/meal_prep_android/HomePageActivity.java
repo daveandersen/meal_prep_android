@@ -44,6 +44,7 @@ public class HomePageActivity extends Fragment {
 //        AdapterPage adapterPage = new AdapterPage(getActivity().getSupportFragmentManager(), getLifecycle());
         AdapterPage adapterPage = new AdapterPage(getChildFragmentManager(), getLifecycle());
         viewPager2.setAdapter(adapterPage);
+        viewPager2.setSaveEnabled(false);
 
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
             tab.setText(getDay(position+1));

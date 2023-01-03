@@ -54,7 +54,7 @@ public class PageFragment extends Fragment {
     public ArrayList<ListItem> dinnerItems;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d("onCreateView", "onCreateView");
 
