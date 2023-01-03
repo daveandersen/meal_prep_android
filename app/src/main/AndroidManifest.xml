@@ -22,9 +22,9 @@
         <activity
             android:name=".DetailsActivity"
             android:exported="false" />
-        <!-- <activity -->
-        <!-- android:name="com.example.meal_prep_android.tabs.PageFragment" -->
-        <!-- android:exported="false" /> -->
+<!--         <activity-->
+<!--         android:name=".PageFragment"-->
+<!--         android:exported="false" />-->
         <activity
             android:name=".HomePageActivity2"
             android:exported="true" />
@@ -60,9 +60,9 @@
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".ProfileActivity" -->
         <!-- android:exported="false" /> -->
-        <!-- <activity -->
-        <!-- android:name=".HomePageActivity" -->
-        <!-- android:exported="false" /> -->
+<!--         <activity-->
+<!--         android:name=".HomePageActivity"-->
+<!--         android:exported="false" />-->
         <activity
             android:name=".LandingPageActivity"
             android:exported="true">

@@ -156,12 +156,28 @@ public class PageFragment extends Fragment {
     }
 
     private void prepareListView() {
-        RecyclerView rv = getView().findViewById(R.id.list_recycler_view);
+        RecyclerView rv = getView().findViewById(R.id.breakfast_recycler_view);
+        RecyclerView rv2 = getView().findViewById(R.id.lunch_recycler_view);
+        RecyclerView rv3 = getView().findViewById(R.id.dinner_recycler_view);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+
         DataModelAdapter dataModelAdapter = new DataModelAdapter(breakfastItems);
+        DataModelAdapter dataModelAdapter2 = new DataModelAdapter(lunchItems);
+        DataModelAdapter dataModelAdapter3 = new DataModelAdapter(dinnerItems);
+
 
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(dataModelAdapter);
+
+        rv2.setLayoutManager(layoutManager2);
+        rv2.setAdapter(dataModelAdapter2);
+
+        rv3.setLayoutManager(layoutManager3);
+        rv3.setAdapter(dataModelAdapter3);
+
     }
 }
 

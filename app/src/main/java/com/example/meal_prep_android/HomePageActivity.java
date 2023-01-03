@@ -41,7 +41,8 @@ public class HomePageActivity extends Fragment {
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         ViewPager2 viewPager2 = view.findViewById(R.id.view_pager);
 
-        AdapterPage adapterPage = new AdapterPage(getActivity().getSupportFragmentManager(), getLifecycle());
+//        AdapterPage adapterPage = new AdapterPage(getActivity().getSupportFragmentManager(), getLifecycle());
+        AdapterPage adapterPage = new AdapterPage(getChildFragmentManager(), getLifecycle());
         viewPager2.setAdapter(adapterPage);
 
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
