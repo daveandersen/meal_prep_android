@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 //                    bundle.putString("email", emailText);
 //                    intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
+//                    finish();
                 } else {
                     makeToast("Wrong username or password");
                 }
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), RegisterActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         });
 
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ChangePasswordActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         });
     }

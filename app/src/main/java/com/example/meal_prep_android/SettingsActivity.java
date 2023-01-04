@@ -1,6 +1,7 @@
 package com.example.meal_prep_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import com.bumptech.glide.Glide;
 
 public class SettingsActivity extends AppCompatActivity {
     ImageView profileImage;
-    TextView change_password;
+    CardView change_password;
+    CardView about;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.image_view);
         change_password = findViewById(R.id.change_password);
+        about = findViewById(R.id.about);
 
         Glide.with(this)
                 .load("https://reqres.in/img/faces/7-image.jpg")
@@ -30,6 +34,14 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AboutActivity.class);
                 startActivity(intent);
             }
         });

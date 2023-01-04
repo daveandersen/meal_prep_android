@@ -66,6 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_face_black_24dp"
+                    app:tint="@color/cardText1"
                     />
             </androidx.cardview.widget.CardView>
             <TextView
@@ -75,7 +76,7 @@
                 android:text="Edit Profile"
                 android:textSize="25dp"
                 android:layout_marginLeft="20dp"
-
+                android:drawableEnd="@drawable/ic_arrow_black_24dp"
                 />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -111,6 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_setting_black_24dp"
+                    app:tint="@color/cardText1"
                     />
             </androidx.cardview.widget.CardView>
             <TextView
@@ -120,6 +122,8 @@
                 android:layout_marginLeft="20dp"
                 android:text="Setting"
                 android:textSize="25dp"
+                android:drawableEnd="@drawable/ic_arrow_black_24dp"
+
                 />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -155,6 +159,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_logout_black_24dp"
+                    app:tint="@color/cardText1"
                     />
             </androidx.cardview.widget.CardView>
             <TextView
@@ -164,7 +169,7 @@
                 android:text="Logout"
                 android:textSize="25dp"
                 android:layout_marginLeft="20dp"
-
+                android:drawableEnd="@drawable/ic_arrow_black_24dp"
                 />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

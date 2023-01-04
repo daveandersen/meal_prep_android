@@ -17,11 +17,12 @@ import java.io.InputStream;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button register_btn;
-    private TextView signup_btn;
+    private TextView login_btn;
     private ImageView signup_pic;
     private EditText usernameText;
     private EditText emailText;
     private EditText passwordText;
+    private EditText confirmPasswordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +30,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         register_btn = findViewById(R.id.register_btn);
-//        signup_btn = findViewById(R.id.signup_btn);
+        login_btn = findViewById(R.id.login_btn);
         signup_pic = findViewById(R.id.signup_pic);
-        usernameText = findViewById(R.id.username_field);
         emailText = findViewById(R.id.email_field);
         passwordText = findViewById(R.id.password_field);
+        confirmPasswordText = findViewById(R.id.confirm_password_field);
 
         try {
             InputStream ims = this.getAssets().open("images/login.jpg");
@@ -46,31 +47,36 @@ public class RegisterActivity extends AppCompatActivity {
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameText.getText().toString();
                 String email = emailText.getText().toString();
                 String password = passwordText.getText().toString();
+                String confirmPassword = confirmPasswordText.getText().toString();
 
-                if(username.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please enter username", Toast.LENGTH_LONG).show();
-                } else if(email.equals("")) {
+                if(email.equals("")) {
                     Toast.makeText(getApplicationContext(), "Please enter email", Toast.LENGTH_LONG).show();
                 } else if(password.equals("")) {
                     Toast.makeText(getApplicationContext(), "Please enter password", Toast.LENGTH_LONG).show();
-                } else {
-                    Intent intent = new Intent(v.getContext(), LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                } else if(confirmPassword.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter confirm password", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    if(password.equals(confirmPassword)) {
+                        Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                        startActivity(intent);
+//                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Confirm password does not match with password", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
 
-//        signup_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(), RegisterActivity.class);
-//                startActivity(intent);
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                startActivity(intent);
 //                finish();
-//            }
-//        });
+            }
+        });
     }
 }
